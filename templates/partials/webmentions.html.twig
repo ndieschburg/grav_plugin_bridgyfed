@@ -1,0 +1,97 @@
+{% if interactions|length > 0 %}
+<section class="bridgyfed-webmentions">
+    <h3 class="bridgyfed-title">{{ 'PLUGIN_BRIDGYFED.INTERACTIONS'|t }}</h3>
+
+    {# Statistics #}
+    {% if counts.likes or counts.reposts or counts.bookmarks %}
+    <div class="bridgyfed-stats">
+        {% if counts.likes %}
+        <span class="bridgyfed-stat bridgyfed-likes">
+            <i class="la la-heart"></i> {{ counts.likes }}
+        </span>
+        {% endif %}
+        {% if counts.reposts %}
+        <span class="bridgyfed-stat bridgyfed-reposts">
+            <i class="la la-retweet"></i> {{ counts.reposts }}
+        </span>
+        {% endif %}
+        {% if counts.bookmarks %}
+        <span class="bridgyfed-stat bridgyfed-bookmarks">
+            <i class="la la-bookmark"></i> {{ counts.bookmarks }}
+        </span>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {# Facepile (avatars of likes, reposts, bookmarks) #}
+    {% set facepile_items = interactions|filter(i => i.type != 'reply')|slice(0, config.facepile_limit|default(20)) %}
+    {% if facepile_items|length > 0 and config.show_facepile|default(true) %}
+    <div class="bridgyfed-facepile">
+        {% for item in facepile_items %}
+            {% if item.author.url %}
+            <a href="{{ item.author.url }}" class="bridgyfed-avatar-link" title="{{ item.author.name }} ({{ item.type }})" rel="nofollow noopener" target="_blank">
+                {% if item.author.photo %}
+                <img src="{{ item.author.photo }}" alt="{{ item.author.name }}" class="bridgyfed-avatar" loading="lazy" />
+                {% else %}
+                <span class="bridgyfed-avatar bridgyfed-avatar-placeholder">{{ item.author.name|first|upper }}</span>
+                {% endif %}
+            </a>
+            {% else %}
+            <span class="bridgyfed-avatar-link" title="{{ item.author.name }} ({{ item.type }})">
+                {% if item.author.photo %}
+                <img src="{{ item.author.photo }}" alt="{{ item.author.name }}" class="bridgyfed-avatar" loading="lazy" />
+                {% else %}
+                <span class="bridgyfed-avatar bridgyfed-avatar-placeholder">{{ item.author.name|first|upper }}</span>
+                {% endif %}
+            </span>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {# Replies #}
+    {% set replies = interactions|filter(i => i.type == 'reply') %}
+    {% if replies|length > 0 and config.show_replies|default(true) %}
+    <div class="bridgyfed-replies">
+        <h4 class="bridgyfed-replies-title">{{ 'PLUGIN_BRIDGYFED.REPLIES'|t }} ({{ replies|length }})</h4>
+        {% for reply in replies %}
+        <article class="bridgyfed-reply h-cite">
+            <header class="bridgyfed-reply-header">
+                {% if reply.author.photo %}
+                <img src="{{ reply.author.photo }}" alt="" class="bridgyfed-reply-avatar u-photo" loading="lazy" />
+                {% else %}
+                <span class="bridgyfed-reply-avatar bridgyfed-avatar-placeholder">{{ reply.author.name|first|upper }}</span>
+                {% endif %}
+                <div class="bridgyfed-reply-meta">
+                    {% if reply.author.url %}
+                    <a href="{{ reply.author.url }}" class="bridgyfed-reply-author p-author h-card" rel="nofollow noopener" target="_blank">
+                        {{ reply.author.name|default('Anonymous') }}
+                    </a>
+                    {% else %}
+                    <span class="bridgyfed-reply-author">{{ reply.author.name|default('Anonymous') }}</span>
+                    {% endif %}
+                    {% if reply.published %}
+                    <time class="bridgyfed-reply-time dt-published" datetime="{{ reply.published }}">
+                        {{ reply.published|date('d/m/Y H:i') }}
+                    </time>
+                    {% endif %}
+                </div>
+            </header>
+            {% if reply.content %}
+            <div class="bridgyfed-reply-content p-content">
+                {{ reply.content|raw }}
+            </div>
+            {% endif %}
+            <footer class="bridgyfed-reply-footer">
+                {% set reply_url = reply.original_url|default(reply.source) %}
+                <a href="{{ reply_url }}" class="bridgyfed-reply-link u-url" rel="nofollow noopener" target="_blank">
+                    {{ 'PLUGIN_BRIDGYFED.VIEW_ON_FEDIVERSE'|t }}
+                </a>
+            </footer>
+        </article>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</section>
+{% endif %}

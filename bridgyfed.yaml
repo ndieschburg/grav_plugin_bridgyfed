@@ -1,0 +1,83 @@
+enabled: true
+
+# Profil auteur (requis pour Bridgy Fed)
+# Si non renseigné, le plugin utilise les infos du site (system.yaml / site.yaml)
+author:
+  name: ""              # Nom affiché. Fallback: site.author.name ou site.title
+  url: ""               # URL du site. Fallback: auto-détecté via Grav URI
+  photo: ""             # Photo de profil. Fallback: custom_logo du thème ou favicon du site
+  featured: ""          # Image de bannière/header (optionnel)
+  note: ""              # Bio/description. Fallback: site.metadata.description
+  username: ""          # Handle personnalisé, ex: "alice" pour @alice@domain.com (optionnel)
+
+# Webmention
+webmention:
+  endpoint: /webmention
+  # Endpoint où envoyer les webmentions sortantes (pour publication)
+  bridgy_fed_endpoint: https://fed.brid.gy/webmention
+
+# Stockage
+storage:
+  path: user/data/bridgyfed
+
+# Sécurité
+security:
+  allowed_sources:
+    - fed.brid.gy
+    - brid.gy
+  rate_limit:
+    enabled: true
+    max_requests: 10
+    window_seconds: 60
+  fetch_timeout: 5
+  max_content_size: 1048576   # 1MB max pour fetch
+  max_content_length: 2000    # Caractères max pour contenu webmention
+  sanitize_html: true
+
+# Injection des microformats
+microformats:
+  # Injection automatique sur ces templates
+  templates:
+    - item
+    - blog-item
+    - post
+  # Éléments à injecter
+  inject_hcard_homepage: true     # h-card sur la homepage
+  inject_hentry: true             # h-entry sur les articles
+  inject_activityjson_link: true  # <link rel="alternate" type="application/activity+json">
+  inject_photos: true             # Ajouter u-photo aux images
+  inject_videos: true             # Ajouter u-video aux vidéos
+  inject_categories: true         # Convertir tags en p-category
+
+# Affichage des webmentions reçues
+display:
+  auto_inject: true
+  show_likes: true
+  show_reposts: true
+  show_replies: true
+  show_bookmarks: true
+  show_facepile: true             # Avatars des interactions
+  facepile_limit: 20              # Nombre max d'avatars
+  replies_order: "desc"           # asc ou desc
+
+# Notifications (optionnel)
+notifications:
+  email:
+    enabled: false
+    to: ""
+  telegram:
+    enabled: false
+    bot_token: ""
+    chat_id: ""
+
+# Cache
+cache:
+  enabled: true
+  ttl: 3600
+
+# Options avancées
+advanced:
+  # Ne pas bridger les articles plus vieux que X jours (Bridgy Fed limite à 14 jours)
+  max_post_age_days: 14
+  # Ajouter #nobridge dans les métadonnées pour désactiver le bridge
+  respect_nobridge: true

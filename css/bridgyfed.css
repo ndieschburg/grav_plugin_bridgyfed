@@ -1,0 +1,250 @@
+/**
+ * Bridgy Fed - Webmentions Styles
+ * Styles for displaying Fediverse interactions
+ */
+
+/* Hidden h-card on homepage */
+.bridgyfed-hcard {
+    display: none !important;
+}
+
+/* Webmentions Section */
+.bridgyfed-webmentions {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.bridgyfed-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: inherit;
+}
+
+/* Statistics */
+.bridgyfed-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.bridgyfed-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #666;
+}
+
+.bridgyfed-stat i {
+    font-size: 1.1em;
+}
+
+.bridgyfed-likes i {
+    color: #e0245e;
+}
+
+.bridgyfed-reposts i {
+    color: #17bf63;
+}
+
+.bridgyfed-bookmarks i {
+    color: #1da1f2;
+}
+
+/* Facepile */
+.bridgyfed-facepile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.bridgyfed-avatar-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+}
+
+.bridgyfed-avatar-link:hover {
+    transform: scale(1.1);
+}
+
+.bridgyfed-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bridgyfed-avatar-placeholder {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Replies Section */
+.bridgyfed-replies {
+    margin-top: 1.5rem;
+}
+
+.bridgyfed-replies-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+/* Individual Reply */
+.bridgyfed-reply {
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    background: rgba(128, 128, 128, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid #667eea;
+}
+
+.bridgyfed-reply-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.bridgyfed-reply-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.bridgyfed-reply-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.bridgyfed-reply-author {
+    font-weight: 600;
+    color: inherit;
+    text-decoration: none;
+}
+
+.bridgyfed-reply-author:hover {
+    text-decoration: underline;
+}
+
+.bridgyfed-reply-time {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.bridgyfed-reply-content {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: inherit;
+}
+
+.bridgyfed-reply-content p {
+    margin: 0 0 0.5rem;
+}
+
+.bridgyfed-reply-content p:last-child {
+    margin-bottom: 0;
+}
+
+.bridgyfed-reply-content a {
+    color: #667eea;
+    word-break: break-word;
+}
+
+.bridgyfed-reply-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+}
+
+.bridgyfed-reply-footer {
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.bridgyfed-reply-link {
+    font-size: 0.85rem;
+    color: #667eea;
+    text-decoration: none;
+}
+
+.bridgyfed-reply-link:hover {
+    text-decoration: underline;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .bridgyfed-stat {
+        color: #999;
+    }
+
+    .bridgyfed-reply {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .bridgyfed-replies-title {
+        color: #aaa;
+    }
+
+    .bridgyfed-reply-time {
+        color: #777;
+    }
+
+    .bridgyfed-avatar {
+        border-color: #333;
+    }
+
+    .bridgyfed-avatar-placeholder {
+        border-color: #333;
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .bridgyfed-stats {
+        gap: 0.75rem;
+    }
+
+    .bridgyfed-avatar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .bridgyfed-avatar-placeholder {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+
+    .bridgyfed-reply {
+        padding: 0.75rem;
+    }
+
+    .bridgyfed-reply-avatar {
+        width: 36px;
+        height: 36px;
+    }
+}

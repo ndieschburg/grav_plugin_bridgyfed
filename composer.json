@@ -1,0 +1,24 @@
+{
+    "name": "hophop/grav-plugin-bridgyfed",
+    "description": "Connect your Grav site to the Fediverse via Bridgy Fed",
+    "type": "grav-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Noel Dieschburg",
+            "email": "noel.dieschburg@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "mf2/mf2": "^0.5.0"
+    },
+    "suggest": {
+        "mf2/mf2": "For full Microformats2 parsing support"
+    },
+    "autoload": {
+        "psr-4": {
+            "Grav\\Plugin\\Bridgyfed\\": "classes/"
+        }
+    }
+}

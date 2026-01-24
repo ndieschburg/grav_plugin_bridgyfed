@@ -1,0 +1,356 @@
+name: Bridgy Fed
+slug: bridgyfed
+type: plugin
+version: 1.0.0
+description: Connect your Grav site to the Fediverse via Bridgy Fed
+icon: share-alt
+author:
+  name: Noel Dieschburg
+  email: noel.dieschburg@gmail.com
+  url: https://trucs.hophop.be
+homepage: https://github.com/ndieschburg/grav_plugin_bridgyfed
+keywords: grav, plugin, fediverse, bridgy, webmention, activitypub, mastodon, bluesky, microformats
+bugs: https://github.com/ndieschburg/grav_plugin_bridgyfed/issues
+docs: https://github.com/ndieschburg/grav_plugin_bridgyfed/blob/main/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.7.0' }
+
+form:
+  validation: loose
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        # Tab 1: General
+        general:
+          type: tab
+          title: PLUGIN_BRIDGYFED.ADMIN.TAB_GENERAL
+          fields:
+            enabled:
+              type: toggle
+              label: PLUGIN_ADMIN.PLUGIN_STATUS
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+        # Tab 2: Author
+        author_tab:
+          type: tab
+          title: PLUGIN_BRIDGYFED.ADMIN.TAB_AUTHOR
+          fields:
+            author_section:
+              type: section
+              title: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_SECTION
+              text: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_SECTION_HELP
+              underline: true
+              fields:
+                author.name:
+                  type: text
+                  label: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_NAME
+                  help: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_NAME_HELP
+                  placeholder: "Leave empty to use site title"
+                author.photo:
+                  type: text
+                  label: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_PHOTO
+                  help: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_PHOTO_HELP
+                  placeholder: "/user/images/avatar.png"
+                author.featured:
+                  type: text
+                  label: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_FEATURED
+                  help: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_FEATURED_HELP
+                  placeholder: "/user/images/banner.jpg"
+                author.note:
+                  type: textarea
+                  label: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_NOTE
+                  help: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_NOTE_HELP
+                  placeholder: "Leave empty to use site description"
+                  rows: 3
+                author.username:
+                  type: text
+                  label: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_USERNAME
+                  help: PLUGIN_BRIDGYFED.ADMIN.AUTHOR_USERNAME_HELP
+                  placeholder: "alice"
+
+        # Tab 3: Microformats
+        microformats_tab:
+          type: tab
+          title: PLUGIN_BRIDGYFED.ADMIN.TAB_MICROFORMATS
+          fields:
+            microformats_section:
+              type: section
+              title: PLUGIN_BRIDGYFED.ADMIN.MICROFORMATS_SECTION
+              underline: true
+              fields:
+                microformats.inject_hcard_homepage:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.INJECT_HCARD
+                  help: PLUGIN_BRIDGYFED.ADMIN.INJECT_HCARD_HELP
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                microformats.inject_hentry:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.INJECT_HENTRY
+                  help: PLUGIN_BRIDGYFED.ADMIN.INJECT_HENTRY_HELP
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                microformats.inject_activityjson_link:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.INJECT_ACTIVITYJSON
+                  help: PLUGIN_BRIDGYFED.ADMIN.INJECT_ACTIVITYJSON_HELP
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                microformats.inject_photos:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.INJECT_PHOTOS
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                microformats.inject_videos:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.INJECT_VIDEOS
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                microformats.inject_categories:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.INJECT_CATEGORIES
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                microformats.templates:
+                  type: array
+                  label: PLUGIN_BRIDGYFED.ADMIN.TEMPLATES
+                  help: PLUGIN_BRIDGYFED.ADMIN.TEMPLATES_HELP
+                  placeholder_key: template
+                  placeholder_value: template name
+
+        # Tab 4: Display
+        display_tab:
+          type: tab
+          title: PLUGIN_BRIDGYFED.ADMIN.TAB_DISPLAY
+          fields:
+            display_section:
+              type: section
+              title: PLUGIN_BRIDGYFED.ADMIN.DISPLAY_SECTION
+              underline: true
+              fields:
+                display.auto_inject:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.AUTO_INJECT
+                  help: PLUGIN_BRIDGYFED.ADMIN.AUTO_INJECT_HELP
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                display.show_likes:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.SHOW_LIKES
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                display.show_reposts:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.SHOW_REPOSTS
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                display.show_replies:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.SHOW_REPLIES
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                display.show_bookmarks:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.SHOW_BOOKMARKS
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                display.show_facepile:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.SHOW_FACEPILE
+                  help: PLUGIN_BRIDGYFED.ADMIN.SHOW_FACEPILE_HELP
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                display.facepile_limit:
+                  type: number
+                  label: PLUGIN_BRIDGYFED.ADMIN.FACEPILE_LIMIT
+                  default: 20
+                  validate:
+                    min: 1
+                    max: 100
+                display.replies_order:
+                  type: select
+                  label: PLUGIN_BRIDGYFED.ADMIN.REPLIES_ORDER
+                  default: desc
+                  options:
+                    asc: PLUGIN_BRIDGYFED.ADMIN.ORDER_ASC
+                    desc: PLUGIN_BRIDGYFED.ADMIN.ORDER_DESC
+
+        # Tab 5: Security
+        security_tab:
+          type: tab
+          title: PLUGIN_BRIDGYFED.ADMIN.TAB_SECURITY
+          fields:
+            security_section:
+              type: section
+              title: PLUGIN_BRIDGYFED.ADMIN.SECURITY_SECTION
+              underline: true
+              fields:
+                security.allowed_sources:
+                  type: array
+                  label: PLUGIN_BRIDGYFED.ADMIN.ALLOWED_SOURCES
+                  help: PLUGIN_BRIDGYFED.ADMIN.ALLOWED_SOURCES_HELP
+                  placeholder_key: source
+                  placeholder_value: domain
+                security.rate_limit.enabled:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.RATE_LIMIT_ENABLED
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                security.rate_limit.max_requests:
+                  type: number
+                  label: PLUGIN_BRIDGYFED.ADMIN.RATE_LIMIT_MAX
+                  default: 10
+                  validate:
+                    min: 1
+                    max: 100
+                security.rate_limit.window_seconds:
+                  type: number
+                  label: PLUGIN_BRIDGYFED.ADMIN.RATE_LIMIT_WINDOW
+                  default: 60
+                  validate:
+                    min: 10
+                    max: 3600
+                security.fetch_timeout:
+                  type: number
+                  label: PLUGIN_BRIDGYFED.ADMIN.FETCH_TIMEOUT
+                  default: 5
+                  validate:
+                    min: 1
+                    max: 30
+                security.max_content_length:
+                  type: number
+                  label: PLUGIN_BRIDGYFED.ADMIN.MAX_CONTENT_LENGTH
+                  default: 2000
+                  validate:
+                    min: 100
+                    max: 10000
+
+        # Tab 6: Advanced
+        advanced_tab:
+          type: tab
+          title: PLUGIN_BRIDGYFED.ADMIN.TAB_ADVANCED
+          fields:
+            advanced_section:
+              type: section
+              title: PLUGIN_BRIDGYFED.ADMIN.ADVANCED_SECTION
+              underline: true
+              fields:
+                webmention.endpoint:
+                  type: text
+                  label: PLUGIN_BRIDGYFED.ADMIN.WEBMENTION_ENDPOINT
+                  default: /webmention
+                storage.path:
+                  type: text
+                  label: PLUGIN_BRIDGYFED.ADMIN.STORAGE_PATH
+                  default: user/data/bridgyfed
+                advanced.max_post_age_days:
+                  type: number
+                  label: PLUGIN_BRIDGYFED.ADMIN.MAX_POST_AGE
+                  help: PLUGIN_BRIDGYFED.ADMIN.MAX_POST_AGE_HELP
+                  default: 14
+                  validate:
+                    min: 1
+                    max: 365
+                advanced.respect_nobridge:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.RESPECT_NOBRIDGE
+                  help: PLUGIN_BRIDGYFED.ADMIN.RESPECT_NOBRIDGE_HELP
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                cache.enabled:
+                  type: toggle
+                  label: PLUGIN_BRIDGYFED.ADMIN.CACHE_ENABLED
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+                cache.ttl:
+                  type: number
+                  label: PLUGIN_BRIDGYFED.ADMIN.CACHE_TTL
+                  default: 3600
+                  validate:
+                    min: 60
+                    max: 86400

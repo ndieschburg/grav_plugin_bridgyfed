@@ -1,0 +1,92 @@
+PLUGIN_BRIDGYFED:
+  # Frontend
+  INTERACTIONS: "Fediverse Interactions"
+  REPLIES: "Comments"
+  VIEW_ON_FEDIVERSE: "View on Fediverse"
+  LIKES: "Likes"
+  REPOSTS: "Reposts"
+  BOOKMARKS: "Bookmarks"
+
+  # Admin - Tabs
+  ADMIN:
+    TAB_GENERAL: "General"
+    TAB_AUTHOR: "Author"
+    TAB_MICROFORMATS: "Microformats"
+    TAB_DISPLAY: "Display"
+    TAB_SECURITY: "Security"
+    TAB_ADVANCED: "Advanced"
+    TAB_FEDIVERSE: "Fediverse"
+
+    # Author section
+    AUTHOR_SECTION: "Author Profile"
+    AUTHOR_SECTION_HELP: "This information is used to create your Fediverse profile. If left empty, site values will be used."
+    AUTHOR_NAME: "Name"
+    AUTHOR_NAME_HELP: "Name displayed on the Fediverse. Leave empty to use site title."
+    AUTHOR_PHOTO: "Profile Photo"
+    AUTHOR_PHOTO_HELP: "URL of profile photo. Leave empty to use theme logo."
+    AUTHOR_FEATURED: "Banner Image"
+    AUTHOR_FEATURED_HELP: "URL of banner/header image (optional)"
+    AUTHOR_NOTE: "Bio"
+    AUTHOR_NOTE_HELP: "Description displayed on your Fediverse profile. Leave empty to use site description."
+    AUTHOR_USERNAME: "Custom Username"
+    AUTHOR_USERNAME_HELP: "Custom handle (e.g. alice for @alice@yoursite.com)"
+
+    # Microformats section
+    MICROFORMATS_SECTION: "Microformats Injection"
+    INJECT_HCARD: "h-card on homepage"
+    INJECT_HCARD_HELP: "Inject representative h-card for Bridgy Fed"
+    INJECT_HENTRY: "h-entry on articles"
+    INJECT_HENTRY_HELP: "Enrich articles with h-entry microformats"
+    INJECT_ACTIVITYJSON: "ActivityPub link"
+    INJECT_ACTIVITYJSON_HELP: "Add ActivityPub discovery link in head"
+    INJECT_PHOTOS: "u-photo on images"
+    INJECT_VIDEOS: "u-video on videos"
+    INJECT_CATEGORIES: "p-category for tags"
+    TEMPLATES: "Target templates"
+    TEMPLATES_HELP: "Page templates to inject microformats on"
+
+    # Display section
+    DISPLAY_SECTION: "Webmentions Display"
+    AUTO_INJECT: "Auto inject"
+    AUTO_INJECT_HELP: "Automatically display webmentions under articles"
+    SHOW_LIKES: "Show likes"
+    SHOW_REPOSTS: "Show reposts"
+    SHOW_REPLIES: "Show replies"
+    SHOW_BOOKMARKS: "Show bookmarks"
+    SHOW_FACEPILE: "Show avatars"
+    SHOW_FACEPILE_HELP: "Show avatar pile for likes/reposts"
+    FACEPILE_LIMIT: "Max avatars"
+    REPLIES_ORDER: "Replies order"
+    ORDER_ASC: "Oldest first"
+    ORDER_DESC: "Newest first"
+
+    # Security section
+    SECURITY_SECTION: "Security"
+    ALLOWED_SOURCES: "Allowed sources"
+    ALLOWED_SOURCES_HELP: "Domains allowed to send webmentions"
+    RATE_LIMIT_ENABLED: "Enable rate limiting"
+    RATE_LIMIT_MAX: "Max requests"
+    RATE_LIMIT_WINDOW: "Window (seconds)"
+    FETCH_TIMEOUT: "Timeout (seconds)"
+    MAX_CONTENT_LENGTH: "Max content length"
+
+    # Advanced section
+    ADVANCED_SECTION: "Advanced Options"
+    WEBMENTION_ENDPOINT: "Webmention endpoint"
+    STORAGE_PATH: "Storage path"
+    MAX_POST_AGE: "Max post age (days)"
+    MAX_POST_AGE_HELP: "Bridgy Fed does not bridge posts older than 14 days"
+    RESPECT_NOBRIDGE: "Respect #nobridge"
+    RESPECT_NOBRIDGE_HELP: "Do not bridge articles with nobridge tag"
+    CACHE_ENABLED: "Enable cache"
+    CACHE_TTL: "Cache TTL (seconds)"
+
+    # Per-article fields
+    PUBLISH_FEDIVERSE: "Publish to Fediverse"
+    PUBLISH_FEDIVERSE_HELP: "Sends a webmention to Bridgy Fed on save"
+    PUBLISHED_AT: "Published at"
+    PUBLISHED_AT_HELP: "Date of last Fediverse publication"
+    REPLY_TO: "In reply to (URL)"
+    REPLY_TO_HELP: "URL of a Fediverse post this article replies to"
+    NOBRIDGE: "Do not bridge this article"
+    NOBRIDGE_HELP: "Prevents this specific article from being published to the Fediverse"

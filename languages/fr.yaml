@@ -1,0 +1,92 @@
+PLUGIN_BRIDGYFED:
+  # Frontend
+  INTERACTIONS: "Interactions du Fediverse"
+  REPLIES: "Commentaires"
+  VIEW_ON_FEDIVERSE: "Voir sur le Fediverse"
+  LIKES: "J'aime"
+  REPOSTS: "Partages"
+  BOOKMARKS: "Favoris"
+
+  # Admin - Tabs
+  ADMIN:
+    TAB_GENERAL: "General"
+    TAB_AUTHOR: "Auteur"
+    TAB_MICROFORMATS: "Microformats"
+    TAB_DISPLAY: "Affichage"
+    TAB_SECURITY: "Securite"
+    TAB_ADVANCED: "Avance"
+    TAB_FEDIVERSE: "Fediverse"
+
+    # Author section
+    AUTHOR_SECTION: "Profil Auteur"
+    AUTHOR_SECTION_HELP: "Ces informations sont utilisees pour creer votre profil Fediverse. Si non renseignees, les valeurs du site seront utilisees."
+    AUTHOR_NAME: "Nom"
+    AUTHOR_NAME_HELP: "Nom affiche sur le Fediverse. Laisser vide pour utiliser le titre du site."
+    AUTHOR_PHOTO: "Photo de profil"
+    AUTHOR_PHOTO_HELP: "URL de la photo de profil. Laisser vide pour utiliser le logo du theme."
+    AUTHOR_FEATURED: "Image de banniere"
+    AUTHOR_FEATURED_HELP: "URL de l'image de banniere/header (optionnel)"
+    AUTHOR_NOTE: "Bio"
+    AUTHOR_NOTE_HELP: "Description affichee sur votre profil Fediverse. Laisser vide pour utiliser la description du site."
+    AUTHOR_USERNAME: "Nom d'utilisateur personnalise"
+    AUTHOR_USERNAME_HELP: "Handle personnalise (ex: alice pour @alice@votresite.com)"
+
+    # Microformats section
+    MICROFORMATS_SECTION: "Injection des Microformats"
+    INJECT_HCARD: "h-card sur la page d'accueil"
+    INJECT_HCARD_HELP: "Injecter une h-card representative pour Bridgy Fed"
+    INJECT_HENTRY: "h-entry sur les articles"
+    INJECT_HENTRY_HELP: "Enrichir les articles avec les microformats h-entry"
+    INJECT_ACTIVITYJSON: "Lien ActivityPub"
+    INJECT_ACTIVITYJSON_HELP: "Ajouter le lien de decouverte ActivityPub dans le head"
+    INJECT_PHOTOS: "u-photo sur les images"
+    INJECT_VIDEOS: "u-video sur les videos"
+    INJECT_CATEGORIES: "p-category pour les tags"
+    TEMPLATES: "Templates cibles"
+    TEMPLATES_HELP: "Templates de page sur lesquels injecter les microformats"
+
+    # Display section
+    DISPLAY_SECTION: "Affichage des Webmentions"
+    AUTO_INJECT: "Injection automatique"
+    AUTO_INJECT_HELP: "Afficher automatiquement les webmentions sous les articles"
+    SHOW_LIKES: "Afficher les likes"
+    SHOW_REPOSTS: "Afficher les partages"
+    SHOW_REPLIES: "Afficher les reponses"
+    SHOW_BOOKMARKS: "Afficher les favoris"
+    SHOW_FACEPILE: "Afficher les avatars"
+    SHOW_FACEPILE_HELP: "Afficher une pile d'avatars pour les likes/reposts"
+    FACEPILE_LIMIT: "Nombre max d'avatars"
+    REPLIES_ORDER: "Ordre des reponses"
+    ORDER_ASC: "Plus anciennes d'abord"
+    ORDER_DESC: "Plus recentes d'abord"
+
+    # Security section
+    SECURITY_SECTION: "Securite"
+    ALLOWED_SOURCES: "Sources autorisees"
+    ALLOWED_SOURCES_HELP: "Domaines autorises a envoyer des webmentions"
+    RATE_LIMIT_ENABLED: "Limiter le debit"
+    RATE_LIMIT_MAX: "Requetes max"
+    RATE_LIMIT_WINDOW: "Fenetre (secondes)"
+    FETCH_TIMEOUT: "Timeout (secondes)"
+    MAX_CONTENT_LENGTH: "Longueur max du contenu"
+
+    # Advanced section
+    ADVANCED_SECTION: "Options avancees"
+    WEBMENTION_ENDPOINT: "Endpoint webmention"
+    STORAGE_PATH: "Chemin de stockage"
+    MAX_POST_AGE: "Age max des articles (jours)"
+    MAX_POST_AGE_HELP: "Bridgy Fed ne bridge pas les articles de plus de 14 jours"
+    RESPECT_NOBRIDGE: "Respecter #nobridge"
+    RESPECT_NOBRIDGE_HELP: "Ne pas bridger les articles avec le tag nobridge"
+    CACHE_ENABLED: "Activer le cache"
+    CACHE_TTL: "Duree du cache (secondes)"
+
+    # Per-article fields
+    PUBLISH_FEDIVERSE: "Publier sur le Fediverse"
+    PUBLISH_FEDIVERSE_HELP: "Envoie une webmention a Bridgy Fed lors de la sauvegarde"
+    PUBLISHED_AT: "Publie le"
+    PUBLISHED_AT_HELP: "Date de la derniere publication sur le Fediverse"
+    REPLY_TO: "En reponse a (URL)"
+    REPLY_TO_HELP: "URL d'un post Fediverse auquel cet article repond"
+    NOBRIDGE: "Ne pas bridger cet article"
+    NOBRIDGE_HELP: "Empeche cet article specifique d'etre publie sur le Fediverse"
