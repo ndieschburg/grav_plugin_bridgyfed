@@ -242,7 +242,7 @@ class BridgyfedPlugin extends Plugin
     public function onBlueprintCreated(Event $event): void
     {
         $blueprint = $event['blueprint'];
-        $type = $event['type'];
+        $type = $event['type'] ?? '';
 
         // Only extend article templates
         $templates = $this->config->get('plugins.bridgyfed.microformats.templates', ['item', 'blog-item', 'post']);
@@ -250,10 +250,61 @@ class BridgyfedPlugin extends Plugin
             return;
         }
 
-        // Get the bridgyfed item blueprint
-        $blueprintFile = 'plugins://bridgyfed/blueprints/item.yaml';
-        if (file_exists($this->grav['locator']->findResource($blueprintFile))) {
-            $blueprint->extend($this->grav['blueprints']->get($blueprintFile));
+        // Add Fediverse tab directly
+        if ($blueprint->get('form/fields/tabs/type') === 'tabs') {
+            $blueprint->extend([
+                'form' => [
+                    'fields' => [
+                        'tabs' => [
+                            'fields' => [
+                                'bridgyfed' => [
+                                    'type' => 'tab',
+                                    'title' => 'PLUGIN_BRIDGYFED.ADMIN.TAB_FEDIVERSE',
+                                    'fields' => [
+                                        'header.bridgyfed.publish' => [
+                                            'type' => 'toggle',
+                                            'label' => 'PLUGIN_BRIDGYFED.ADMIN.PUBLISH_FEDIVERSE',
+                                            'help' => 'PLUGIN_BRIDGYFED.ADMIN.PUBLISH_FEDIVERSE_HELP',
+                                            'highlight' => 1,
+                                            'default' => 0,
+                                            'options' => [
+                                                1 => 'PLUGIN_ADMIN.YES',
+                                                0 => 'PLUGIN_ADMIN.NO',
+                                            ],
+                                            'validate' => ['type' => 'bool'],
+                                        ],
+                                        'header.bridgyfed.published_at' => [
+                                            'type' => 'datetime',
+                                            'label' => 'PLUGIN_BRIDGYFED.ADMIN.PUBLISHED_AT',
+                                            'toggleable' => true,
+                                            'help' => 'PLUGIN_BRIDGYFED.ADMIN.PUBLISHED_AT_HELP',
+                                        ],
+                                        'header.bridgyfed.reply_to' => [
+                                            'type' => 'text',
+                                            'label' => 'PLUGIN_BRIDGYFED.ADMIN.REPLY_TO',
+                                            'help' => 'PLUGIN_BRIDGYFED.ADMIN.REPLY_TO_HELP',
+                                            'toggleable' => true,
+                                            'placeholder' => 'https://mastodon.social/@user/123456',
+                                        ],
+                                        'header.bridgyfed.nobridge' => [
+                                            'type' => 'toggle',
+                                            'label' => 'PLUGIN_BRIDGYFED.ADMIN.NOBRIDGE',
+                                            'help' => 'PLUGIN_BRIDGYFED.ADMIN.NOBRIDGE_HELP',
+                                            'highlight' => 0,
+                                            'default' => 0,
+                                            'options' => [
+                                                1 => 'PLUGIN_ADMIN.YES',
+                                                0 => 'PLUGIN_ADMIN.NO',
+                                            ],
+                                            'validate' => ['type' => 'bool'],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ], true);
         }
     }
 
