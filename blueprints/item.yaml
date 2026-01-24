@@ -10,7 +10,6 @@ form:
         bridgyfed:
           type: tab
           title: PLUGIN_BRIDGYFED.ADMIN.TAB_FEDIVERSE
-          ordering@: options
           fields:
             header.bridgyfed.publish:
               type: toggle
