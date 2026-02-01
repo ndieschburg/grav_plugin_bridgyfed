@@ -187,6 +187,14 @@ class MicroformatsInjector
             }
         }
 
+        // u-photo for hero image (featured image for Fediverse posts)
+        $heroImage = $header->hero_image ?? '';
+        if ($heroImage) {
+            // Build full URL to the hero image
+            $heroUrl = $page->url(true) . '/' . $heroImage;
+            $hiddenElements[] = '<img class="u-photo" src="' . htmlspecialchars($heroUrl) . '" alt="" hidden />';
+        }
+
         // Find the h-entry container and inject hidden elements
         $hiddenHtml = "\n" . implode("\n", $hiddenElements);
 
