@@ -39,7 +39,11 @@ class WebmentionSender
 
         // Check nobridge
         $header = $page->header();
-        if ($header->bridgyfed['nobridge'] ?? false) {
+        $bridgyfed = $header->bridgyfed ?? null;
+        if (is_object($bridgyfed)) {
+            $bridgyfed = (array) $bridgyfed;
+        }
+        if ($bridgyfed['nobridge'] ?? false) {
             return new WebmentionResult(false, 'nobridge is set');
         }
 

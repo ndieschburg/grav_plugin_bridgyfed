@@ -211,11 +211,23 @@ class BridgyfedPlugin extends Plugin
             return;
         }
 
-        // Check if publish to Fediverse is enabled
+        // Check if page is published
         $header = $page->header();
-        $publish = $header->bridgyfed['publish'] ?? false;
-        $nobridge = $header->bridgyfed['nobridge'] ?? false;
-        $alreadyPublished = $header->bridgyfed['published_at'] ?? null;
+        if (!($header->published ?? true)) {
+            return;
+        }
+
+        // Get bridgyfed settings from header (handle both object and array access)
+        $bridgyfed = $header->bridgyfed ?? null;
+        if (is_object($bridgyfed)) {
+            $bridgyfed = (array) $bridgyfed;
+        }
+
+        $publish = $bridgyfed['publish'] ?? false;
+        $nobridge = $bridgyfed['nobridge'] ?? false;
+        $alreadyPublished = $bridgyfed['published_at'] ?? null;
+
+        $this->grav['log']->debug('Bridgy Fed: onAdminSave - publish=' . ($publish ? 'true' : 'false') . ', nobridge=' . ($nobridge ? 'true' : 'false') . ', alreadyPublished=' . ($alreadyPublished ?: 'null'));
 
         if ($publish && !$nobridge && !$alreadyPublished) {
             // Send webmention to Bridgy Fed
@@ -223,8 +235,11 @@ class BridgyfedPlugin extends Plugin
             $result = $sender->send($page);
 
             if ($result->success) {
-                // Update published_at timestamp
-                $header->bridgyfed['published_at'] = date('Y-m-d H:i:s');
+                // Update published_at timestamp in header
+                if (!is_object($header->bridgyfed)) {
+                    $header->bridgyfed = new \stdClass();
+                }
+                $header->bridgyfed->published_at = date('Y-m-d H:i:s');
                 $page->header($header);
 
                 // Log success
