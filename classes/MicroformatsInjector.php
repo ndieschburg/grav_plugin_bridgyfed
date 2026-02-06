@@ -160,15 +160,21 @@ class MicroformatsInjector
         $authorHcard .= '</div>';
         $hiddenElements[] = $authorHcard;
 
+        // Get bridgyfed settings (handle both object and array access)
+        $bridgyfed = $header->bridgyfed ?? null;
+        if (is_object($bridgyfed)) {
+            $bridgyfed = (array) $bridgyfed;
+        }
+
         // u-bridgy-fed trigger (only if publish is enabled)
-        $publish = $header->bridgyfed['publish'] ?? false;
-        $nobridge = $header->bridgyfed['nobridge'] ?? false;
+        $publish = $bridgyfed['publish'] ?? false;
+        $nobridge = $bridgyfed['nobridge'] ?? false;
         if ($publish && !$nobridge) {
             $hiddenElements[] = '<a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden></a>';
         }
 
         // u-in-reply-to (if replying to a Fediverse post)
-        $replyTo = $header->bridgyfed['reply_to'] ?? '';
+        $replyTo = $bridgyfed['reply_to'] ?? '';
         if ($replyTo) {
             $hiddenElements[] = '<a class="u-in-reply-to" href="' . htmlspecialchars($replyTo) . '" hidden></a>';
         }
